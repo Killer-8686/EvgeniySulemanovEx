@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div>
+    <h2 th:text="${insight}"> </h2> <!--Текст пердан в модель, как аттрибут model.addAttribute-->
+    <h2 th:text="${change}">Standard text</h2>
+    <h2 th:utext="${change} ? ${change} : 'Standard text'">Standard text</h2> <!--То же текст, но если null, то стандартный текст оператор ELVIS-->
+
+
+    <!--Получение всех Header из ответа-->
+    <th:block th:each="headerName : ${#request.headerNames}">
+        <li th:utext="${headerName}">Header Name</li>
+
+    </th:block>
+
+<!--    <table>
+        <tr th:each="var : ${#vars.getVariableNames()}">
+            <td th:text="${var}"></td>
+            <td th:text="${#var.getVariable(var)}"></td>
+        </tr>
+    </table>-->
+
+
+
+</div>
+
+
+
+<div th:switch="${users}">
+    <h2 th:case="null">No users found!</h2>
+    <div th:case="*">
+        <h2>Users</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
+                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <p><a href="/user-create">Create user</a> </p>
+</div>
+
+</body>
+</html>

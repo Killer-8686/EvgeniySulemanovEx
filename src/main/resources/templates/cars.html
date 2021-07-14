@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All cars list</title>
+
+</head>
+<body>
+
+<div th:switch="${cars}">
+    <h2 th:case="null">Not found cars</h2>
+    <div th:case="*">
+        <table>
+            <thead>
+
+            <tr>
+                <th>Id</th>
+                <th>Model</th>
+                <th>Year</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car: ${cars}">
+                <td th:text="${car.id}"></td>
+                <td th:text="${car.model}"></td>
+                <td th:text="${car.year}"></td>
+                <td><a th:href="@{car-edit/{id}(id=${car.id})}">Edit</a></td>
+                <td><a th:href="@{delete/{id}(id=${car.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <p><a href="/add">Create car</a></p>
+</div>
+</body>
+</html>

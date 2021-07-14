@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/car-edit}" th:object="${car}" method="post">
+
+    <labet for="id">Id</labet>
+    <input type="text" readonly th:field="*{id}" id="id" placeholder="Id">
+    <label for="Model">Model</label>
+    <input type="text" th:field="*{model}" id="Model" placeholder="Model">
+    <label for="year">Year</label>
+    <input type="text" th:field="*{year}" id="year" placeholder="Year">
+    <input type="submit" value="Send">
+</form>
+
+</body>
+</html>
